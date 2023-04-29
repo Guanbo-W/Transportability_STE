@@ -1,3 +1,5 @@
+################ Verify the double robustness
+################--------The function to estimate the doubly robust, G-computation, and IPTW estimator with combinations of correctly/incorrectly specified outcome/weight models
 EST=function(n, n_m, x_tilde){
   Data=Gen(n, n_m)
   Y_R=Data$Y[Data$R==1] 
