@@ -1,6 +1,4 @@
-
 EST=function(n, n_m, x_tilde){
-  set.seed(i+2)
   Data=Gen(n, n_m)
   Y_R=Data$Y[Data$R==1] 
   R=Data$R
@@ -91,58 +89,26 @@ bias_wrong=colMeans(est[,c(10:12)])-true3[1] # bias of DR, G_comp, IPTW
 sd_wrong=apply(est[,c(10:12)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
 
 #### plots
-plot( c(1,4), las = 2, xlim =c(0.6, 4.4), ylim = c(-1.6, 1.6),  type="n",
+plot( c(1,4), las = 2, xlim =c(0.6, 4.4), ylim = c(-1.2, 1.2),  type="n",
       xlab=TeX(r'(Correct Model(s))',bold=TRUE), ylab=TeX(r'(Bias$\pm$SD)', bold=TRUE), 
       main="Comparison of different model performance, subgroup=3, n_m=1000", xaxt="n")
 axis(1, at=1:4, labels=c(TeX(r'($(\mu, \eta, q)$)', bold=FALSE),TeX(r'($(\mu)$)', bold=FALSE),TeX(r'($(\eta, q)$)', bold=FALSE),TeX(r'(None)', bold=FALSE)) )
 for (i in 1:3){
-  points(0.8+0.1*i,bias_mu_q_eta[i],pch=7+i)
+  points(0.8+0.1*i,bias_mu_q_eta[i],pch=14+i, cex=2)
   segments(0.8+0.1*i, bias_mu_q_eta[i]-sd_mu_q_eta[i], 0.8+0.1*i, bias_mu_q_eta[i]+sd_mu_q_eta[i], lwd = 2 )
 }
 for (i in 1:3){
-  points(1.8+0.1*i,bias_mu[i],pch=7+i)
+  points(1.8+0.1*i,bias_mu[i],pch=14+i, cex=2)
   segments(1.8+0.1*i, bias_mu[i]-sd_mu[i], 1.8+0.1*i, bias_mu[i]+sd_mu[i], lwd = 2 )
 }
 for (i in 1:3){
-  points(2.8+0.1*i,bias_q_eta[i],pch=7+i)
+  points(2.8+0.1*i,bias_q_eta[i],pch=14+i, cex=2)
   segments(2.8+0.1*i, bias_q_eta[i]-sd_q_eta[i], 2.8+0.1*i, bias_q_eta[i]+sd_q_eta[i], lwd = 2 )
 }
 for (i in 1:3){
-  points(3.8+0.1*i,bias_wrong[i],pch=7+i)
+  points(3.8+0.1*i,bias_wrong[i],pch=14+i, cex=2)
   segments(3.8+0.1*i, bias_wrong[i]-sd_wrong[i], 3.8+0.1*i, bias_wrong[i]+sd_wrong[i], lwd = 2 )
 }
 abline(h=0)
 
-legend(0.5, -1, c('Doubly robust', 'Regression', 'IPTW'),  horiz = F, bty = 'n', cex=1.2,pch=c(8,9,10))
-
-################ change sample size, additional simulation in the appendix
-SIM=function(n,n_m){
-  true3=GetTrue(n,n_m,3)
-  est=NULL
-  for (i in 1:nsim) {
-    temp=EST(n, n_m, 3)
-    est=rbind(est,temp)
-  }
-  bias_mu_q_eta=colMeans(est[,c(1:3)])-true3[1] # bias of DR, G_comp, IPTW
-  sd_mu_q_eta=apply(est[,c(1:3)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
-  
-  bias_mu=colMeans(est[,c(4:6)])-true3[1] # bias of DR, G_comp, IPTW
-  sd_mu=apply(est[,c(4:6)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
-  
-  bias_q_eta=colMeans(est[,c(7:9)])-true3[1] # bias of DR, G_comp, IPTW
-  sd_q_eta=apply(est[,c(7:9)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
-  
-  bias_wrong=colMeans(est[,c(10:12)])-true3[1] # bias of DR, G_comp, IPTW
-  sd_wrong=apply(est[,c(10:12)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
-  
-  return(round(rbind(cbind(bias_mu_q_eta,sd_mu_q_eta),cbind(bias_mu,sd_mu),cbind(bias_q_eta,sd_q_eta),cbind(bias_wrong,sd_wrong)),2))
-}
-
-results=NULL
-for (n in c(10000,100000)) {
-  for (n_m in c(1000,2000,5000)) {
-    result=SIM(n,n_m)
-    results=cbind(result,results)
-  }
-}
-results
+legend(0.5, -0.9, c('Doubly robust', 'Regression', 'IPTW'),  horiz = F, bty = 'n', cex=1.5,pch=c(15,16,17))
