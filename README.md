@@ -15,7 +15,7 @@ Other models can be correctly estimated by multi normial or generalized linear r
 
 of each of the subgroup effects using the propsed doubly robust estimator for estimating $\phi_{a=1,s=1}(\tilde{X}=\tilde{x})$ and $\psi_{a=1}(\tilde{X}=\tilde{x}), \forall \tilde{x}=1,\dots,5$ with the specified $n$ (sum of sample sizes of internal and extenal population) and $n_m$ (sample size of internal population). 
 
-The results are show in plots.
+The results are show in plots. They show the consistency of the proposed doubly robust estimator, and the relationships between confidence intervla and simutaneous confidence bands.
 
 `Internal_Mis` contains the code to show the biases and standard deviations of 
 1. (Doubly robust estimator) $\widehat \phi_{a=1,s=1}(\tilde{X}=3)$, 
@@ -31,6 +31,7 @@ when
 
 with the specified $n$ (sum of sample sizes of internal and extenal population) and $n_m$ (sample size of internal population).  
 
+The results are show in plots. They show the doubly robustness property of teh estimator.
 
 `External_Mis` contains the code to show the biases and standard deviations of 
 1. (Doubly robust estimator) $\widehat \psi_{a=1}(\tilde{X}=3)$, 
@@ -46,8 +47,14 @@ when
 
 with the specified $n$ (sum of sample sizes of internal and extenal population) and $n_m$ (sample size of internal population). 
 
+The results are show in plots.  They show the doubly robustness property of teh estimator.
+
 `Rates` contains the code for estimating the RMSE with the varying convergence rates of the
-1. (Doubly robust estimator) $\widehat \phi_{a=1,s=1}(\tilde{X}=3)$, 
-2. (G computation-based estimator) $\widehat \phi^{g}_{a=1,s=1}(\tilde{X}=3)$
+1. (Doubly robust estimator) $\widehat \phi_{a=1,s=1}(\tilde{X}=1)$, 
+2. (G computation-based estimator) $\widehat \phi^{g}_{a=1,s=1}(\tilde{X}=1)$
+
+with the specified $n_m$ (sample size of internal population). 
+
+The results are show in plots. They show the rate robustness of the estimator.
 
 `Reference`: Paper title and link
