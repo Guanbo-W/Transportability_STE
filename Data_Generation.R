@@ -14,7 +14,7 @@ library("dummy")
 library("latex2exp")
 
 ###########------- Parameters specification
-nsim=500
+nsim=5000
 nGetTrue=10000
 p=10
 beta_coefs=matrix(rep(ln(1.05),p),byrow=F,nrow=1)      # coef of R model
