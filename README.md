@@ -1,5 +1,7 @@
 # Simulation code for transporting subgroup treatment effects
 
+`Reference`: Paper title and link
+
 ### `Data_Generation` 
 contains parameter specifications and functions to generate data and the true values.
 
@@ -62,4 +64,4 @@ with the specified $n_m$ (sample size of internal population).
 
 The results are show in plots. They show the rate robustness of the estimator.
 
-`Reference`: Paper title and link
+
