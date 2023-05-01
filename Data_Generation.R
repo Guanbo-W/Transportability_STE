@@ -18,6 +18,7 @@ nsim=5000
 nGetTrue=10000
 p=10
 beta_coefs=matrix(rep(ln(1.05),p),byrow=F,nrow=1)      # coef of R model
+# beta_coefs=matrix(c(rep(ln(1.1),p/2),rep(ln(1.2),p/2)),byrow=F,nrow=1)     # coef of R model for external
 xi_coefs=matrix(c(rep(ln(1.1),p/2),rep(ln(1.5),p/2)),byrow=F,nrow=1)      # coef of S model
 zeta_coefs=matrix(c(rep(ln(1.1),p/2),rep(ln(1.5),p/2)),byrow=F,nrow=1)    # coef of S model
 alpha_1=matrix(c(rep(1,p/2+1),rep(-1,p/2)),byrow=F,nrow=1)     # coef of A model
