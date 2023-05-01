@@ -14,7 +14,7 @@ EST=function(n, n_m, x_tilde){
   n_internal=dim(Data[R==1,])[1]
   #length(Y_R)
   #n_internal
-  ################################# for psi
+  ################################# for psi (actually should be phi_{1,1}(3))
   ##### nuisance parameters for psi_{1,1}(x_tilde):E(Y1|X1=x_tilde,S=1)
   # inverse_weight={1/n_internal sum_{i=1}^{n_internal}I(X1=x_tilde, S=1)}^(-1)
   inverse_weight=(length(which(Data[R==1,]$X1==x_tilde& Data[R==1,]$S==1))/n_internal)^(-1)
@@ -48,7 +48,7 @@ EST=function(n, n_m, x_tilde){
   cb_psi=c(est_psi-quan_cb*sd_psi,est_psi+quan_cb*sd_psi)
   ##### Results
   results1=c(est_psi,sd_psi,ci_psi_point, cb_psi)
-  ################################# for phi
+  ################################# for phi (actually should be psi_{1}(3))
   ##### nuisance parameters for phi_{1,1}(x_tilde):E(Y1|X1=x_tilde,S=1)
   # inverse_weight={1/n_internal sum_{i=1}^{n_internal}I(X1=x_tilde, S=1)}^(-1)
   inverse_weight=(length(which(Data$X1==x_tilde& Data$R==0))/n)^(-1)
