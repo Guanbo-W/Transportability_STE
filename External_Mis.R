@@ -5,7 +5,8 @@ EST=function(n, n_m, x_tilde){
   Y_R=Data$Y[Data$R==1] 
   R=Data$R
   n_internal=dim(Data[R==1,])[1]
-  ##### nuisance parameters for psi_{1}(x_tilde):E(Y1|X1=x_tilde,R=0)
+  ##### nuisance parameters for psi_{1,1}(x_tilde):E(Y1|X1=x_tilde,S=1)
+  # inverse_weight={1/n_internal sum_{i=1}^{n_internal}I(X1=x_tilde, S=1)}^(-1)
   inverse_weight=(length(which(Data$X1==x_tilde& Data$R==0))/n)^(-1)
   # mu=E(Y|A=1,X, R=1)
   model_mu=gam(Y~A+as.factor(X1)+s(X2)+s(X3)+s(X4)+s(X5)+s(X6)+s(X7)+lo(X8)+lo(X9)+lo(X10)+A*as.factor(X1)+A*X2+A*X3+A*X4+A*X5,data=Data[R==1,])  
@@ -136,26 +137,30 @@ SIM=function(n,n_m){
     temp=EST(n, n_m, 3)
     est=rbind(est,temp)
   }
-  bias_mu_q_eta=colMeans(est[,c(1:3)])-true3[1] # bias of DR, G_comp, IPTW
+  bias_mu_q_eta=colMeans(est[,c(1:3)])-true3[2] # bias of DR, G_comp, IPTW
   sd_mu_q_eta=apply(est[,c(1:3)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
   
-  bias_mu=colMeans(est[,c(4:6)])-true3[1] # bias of DR, G_comp, IPTW
+  bias_mu=colMeans(est[,c(4:6)])-true3[2] # bias of DR, G_comp, IPTW
   sd_mu=apply(est[,c(4:6)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
   
-  bias_q_eta=colMeans(est[,c(7:9)])-true3[1] # bias of DR, G_comp, IPTW
+  bias_q_eta=colMeans(est[,c(7:9)])-true3[2] # bias of DR, G_comp, IPTW
   sd_q_eta=apply(est[,c(7:9)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
   
-  bias_wrong=colMeans(est[,c(10:12)])-true3[1] # bias of DR, G_comp, IPTW
+  bias_wrong=colMeans(est[,c(10:12)])-true3[2] # bias of DR, G_comp, IPTW
   sd_wrong=apply(est[,c(10:12)],2,sd) # Monte-Carlo sd of DR, G_comp, IPTW
   
   return(round(rbind(cbind(bias_mu_q_eta,sd_mu_q_eta),cbind(bias_mu,sd_mu),cbind(bias_q_eta,sd_q_eta),cbind(bias_wrong,sd_wrong)),2))
 }
 
+cn=c(10000,100000)
+cnm=c(1000,2000,5000)
 results=NULL
-for (n in c(10000,100000)) {
-  for (n_m in c(1000,2000,5000)) {
-    result=SIM(n,n_m)
+for (i in c(2,1)) {
+  for (j in c(3,2,1)) {
+    result=SIM(cn[i],cnm[j])
+    colnames(result)=c(i*j,i+j)
     results=cbind(result,results)
   }
 }
 results
+colnames(results)=c("4,1,b","4,1,s","4,2,b","4,2,s","4,5,b","4,5,s","5,1,b","5,1,s","5,2,b","5,2,s","5,5,b","5,5,s")
